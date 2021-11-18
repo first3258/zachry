@@ -1,8 +1,10 @@
 <template>
     <div class="nav">
-        <div class="logo">
+        <div class="logo" >
             <img src="../assets/icon/menu_book.png" alt="">
-            <h1>ZACHRY</h1>
+            <a href="/">
+                <h1>ZACHRY</h1>
+            </a>
         </div>
         <div class="search">
             <input id="searchInput" placeholder="Search">
@@ -15,7 +17,7 @@
             </button>
             <p>|</p>
             <button class="login-button">
-                <a href="">เข้าสู่ระบบ</a>
+                <a href="/login">เข้าสู่ระบบ</a>
             </button>
             <p>|</p>
             <img src="../assets/icon/cart.png" alt="">
@@ -34,6 +36,10 @@
     *{
         box-sizing: border-box;
     }
+    a{
+        text-decoration: none;
+        color:white
+    }
     .nav{
         min-height: 64px;
         width: 100%;
@@ -41,14 +47,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 400px;
+        padding:0 10vw ;
     }
 
     .logo{
         display: flex;
         align-items: center;
+        cursor: pointer;
     }
-    .logo>h1{
+    .logo>a>h1{
         margin-left: 10px;
         color: white;
         letter-spacing: 3px;
