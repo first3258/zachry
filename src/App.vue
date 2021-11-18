@@ -4,6 +4,10 @@
  
 </template>
 
+<script>
+    
+</script>
+
 <style>
     *{
         font-family: sans-serif;

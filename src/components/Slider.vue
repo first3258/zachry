@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-
         <carousel class="carousel" :autoplay=4000 :transition=2000 :changeDelay=2000 >
             <slide class="slide">
                 <img src='../assets/icon/Slide1.png' alt="">

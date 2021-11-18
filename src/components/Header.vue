@@ -1,34 +1,64 @@
 <template>
     <div class="nav">
+        
         <div class="logo" >
             <img src="../assets/icon/menu_book.png" alt="">
             <a href="/">
                 <h1>ZACHRY</h1>
             </a>
         </div>
+
         <div class="search">
             <input id="searchInput" placeholder="Search">
             <img src="../assets/icon/search.png" alt="">
         </div>
-
+        
         <div class="control-group">
             <button class="signup-button">
                 <a href="">สมัครสมาชิก</a>
             </button>
             <p>|</p>
-            <button class="login-button">
-                <a href="/login">เข้าสู่ระบบ</a>
+            <button class="login-button" @click="openLogin">
+                <a >เข้าสู่ระบบ</a>
             </button>
             <p>|</p>
             <img src="../assets/icon/cart.png" alt="">
         </div>
+
+        
+        <div>
+            
+        </div>
+
+        <div class="bg-blur" v-if="show" @click="closeLogin"></div>
+
+        <Login class="login" v-show="show" @close="closeLogin"> </Login>
+        
+        
         
     </div>
 </template>
 
 <script>
+    import Login from './Login.vue'
     export default {
-        name: 'Header'
+        name: 'Header',
+        components:{
+            Login
+        },
+        data() {
+            return{
+                show: false,
+            }
+        },
+        methods:{
+            closeLogin(){
+                this.show = false
+            },
+            openLogin(){
+                this.show = true
+            }
+        }
     }
 </script>
 
@@ -46,8 +76,8 @@
         background-color: #D63031;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding:0 10vw ;
+        justify-content: space-evenly;
+        
     }
 
     .logo{
@@ -122,6 +152,7 @@
     }
 
     .login-button{
+        cursor: pointer;
         width: 100px;
         height: 30px;
         margin: 0 10px;
@@ -152,6 +183,29 @@
     .control-group>img{
         margin: 0 10px;
     }
+
+    .login{
+        position: fixed;
+        height: 635px;
+        width: 1075px;
+        top: 15vh;
+        z-index: 10;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+
+    .bg-blur{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 10;
+    }
+
+    
 
     @media only screen and (max-width: 1200px) {
         .nav{

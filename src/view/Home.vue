@@ -1,8 +1,11 @@
 <template>
   <div>
+
     <Header />
     <Filter-menu/>
     <Slider />
+  
+
   </div>
 </template>
 
@@ -10,13 +13,27 @@
   import Header from '../components/Header.vue'
   import FilterMenu from '../components/FilterMenu.vue'
   import Slider from '../components/Slider.vue'
+
+  
   export default {
     name: 'Home',
     components: {
       Header,
       FilterMenu,
-      Slider
-    }
+      Slider,
+     
+    },
+    data() {
+        return {
+            showModal: true
+        }
+    },
   }
 </script>
 
+
+<style scoped>
+
+
+
+</style>

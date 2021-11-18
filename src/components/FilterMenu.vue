@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-filter">
         <div class="filter-group">
             <img src="../assets/icon/menu.png" alt="">
             <a href="">สินค้าใหม่</a>
@@ -19,7 +19,7 @@
 </script>
 
 <style>
-    .container{
+    .container-filter{
         max-width: 1440px;
         margin: 56px auto 0 auto;
     }
