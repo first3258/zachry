@@ -1,24 +1,40 @@
-# zachry
+## Install virtual environment
+```
+pip install virtualenv
+```
 
 ## Project setup
 ```
-npm install
+python -m venv 
+```
+.\Scripts\activate
 ```
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 ```
-npm run serve
+python .\manage.py runserver
 ```
-
-### Compiles and minifies for production
+pip install django
 ```
-npm run build
+pip install django-crispy-forms
 ```
-
-### Lints and fixes files
+pip install stripe
 ```
-npm run lint
+pip install Pillow
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Compiles and hot-reloads for development
+```
+python .\manage.py runsever
+```
+
+## Migration
+```
+python .\manage.py makemigrations
+```
+python manage.py migrate
+```
+## Create Admin
+```
+python manage.py createsuperuser
+```
