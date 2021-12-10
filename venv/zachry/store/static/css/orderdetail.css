@@ -1,0 +1,17 @@
+.orderdetail-container{
+    width: 1000px;
+    margin: 100px auto;
+
+}
+
+.order-table{
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.item{
+    padding-left: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+

@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="cart-container">
+        {% if not cart_items  %}
+        <h1>ไปสั่งสิไอสัส </h1>
+        {% else %}
+        <h1>ตะกร้าของฉัน</h1>
+        <table>
+            <thead>
+                <th style="width: 50%;">รายการ</th>
+                <th>ราคาต่อชิ้น</th>
+                <th>จำนวน</th>
+                <th>ราคารวม</th>
+                <th>ถังขยะ</th>
+            </thead>
+            {% for product in cart_items %}
+            <tr>
+                    <td>
+                        <div style="display:flex; align-items: center;">
+                            <a href="{{product.product.get_url}}">
+                                <img src="{{product.product.image.url}}" alt="" srcset="" style="height:260px;">
+                            </a>
+                            <div style="text-align:center; padding-left:15px">
+                                <p style="font-size: 20px; font-weight: bold; color:#2D3436"> {{product.product.name}} </p>
+                                <p style="font-size: 20px; font-weight: bold; color:#636E72;"> {{product.product.author}} </p>
+                            </div>
+                            
+                        </div>
+                    </td>
+                    <td>{{product.product.price}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.sub_total}}</td>
+                    <td> <a href="{% url 'removeCart' product.product.id %}" onclick="return confirm('ลบสินค้า') "> <img src={% static "icon/Trash.png" %} alt=""> </a> </td>
+                </tr>
+                {% endfor %}
+            </table>
+            
+        <hr>
+        
+        <h1 style="width:100%; text-align: end; margin-top:15px"> ราคารวมทั้งสิ้น {{total}} บาท</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <script src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="{{ data_key }}"
+            data-amount="{{ stripe_total}}"
+            data-name="Zachry"
+            data-description="{{ description }}"
+            data-locale="thailand"
+            data-currency="thb"
+            data-shipping-address="true"
+            data-billing-address="true"
+            data-zip-code="true">
+        </script>
+        {% endif %}
+    </form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'category.html' %}
+    <div class="product-container">
+        <img src="{{product.image.url}}" alt="" srcset="" style="height:600px;">
+
+        <div class="desc-group">
+            <p style="font-size:36px"> {{product.name}} </p>
+            <p style="font-size:24px; margin-top:20px;">{{product.author}} </p>
+
+            <div class="cart-group">
+                <p style="font-size: 28px">{{product.price}} </p>
+                <div>
+                    <input type="number" class="cart-count" value=1 >
+                    <button class="button-product">
+                        <span> 
+                            <img src={% static "icon/cart.png" %} alt="" style="width:18px; height:18px">
+                            <a href="{% url 'addCart' product.id %}">เพิ่มในรถเข็น</a>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <p style="font-size:20px; margin-top:20px;">{{product.desciption}} </p>
+        <div>
+    </div>
+    
+{% endblock content %}

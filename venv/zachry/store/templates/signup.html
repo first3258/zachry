@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/signup.css" %}"/>
+    
+
+    <div class="signup-container">
+        <h1> ลงทะเบียน </h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form | crispy}}
+            <input type="submit" value="Signup" class="signup">
+        </form>
+
+    </div>
+      
+    
+{% endblock content %}
