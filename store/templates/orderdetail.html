@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/layout.css" %}"/>
+
+<link rel="stylesheet" type="text/css" href="{% static "css/orderdetail.css" %}"/>
+
+<div class="orderdetail-container">
+    <a href="{% url 'orderHistory'%} "style="color:black; color: #D63031; font-size: 20px; "> < back </a>
+    <h1 style="font-weight: 400;"> หมายเลขคำสั่งซื้อ {{ order.id }} <h1>
+    <table class="order-table">
+        <thead>
+            <tr>
+                <th style="font-weight: 400;"> รายการสั่งซื้อ </th>
+                <th style="font-weight: 400;"> ราคา </th>
+                <th style="font-weight: 400;"> จำนวน </th>
+                <th style="font-weight: 400;"> รวม </th>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+                <tr>
+                    <td class="item" style="font-weight: 400;"> {{item.product}} </td>
+                    <td class="item" style="font-weight: 400;"> {{item.price}} </td>
+                    <td class="item" style="font-weight: 400;"> {{item.quantity}} </td>
+                    <td class="item" style="font-weight: 400;"> {{item.sub_total}} </td>
+                </tr>
+                <hr>
+            {% endfor %}
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="font-weight: 400;"> ยอดชำระเงิน </td>
+                <td style="font-weight: 400;"> {{order.total}} </td>
+            </tr>
+        </tbody>
+    </table>    
+    <button onclick="window.print();" class="print" style="background-color: #D63031; border:none; border-radius:10px; padding:10px; color:#fff; cursor: pointer;">
+        ปริ้นใบสั่งซื้อ
+    </button>
+</div>
+
+
+{% endblock content %}

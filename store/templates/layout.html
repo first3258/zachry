@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zachry Book Store</title>
+    
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=Pridi:wght@400;500&family=Taviraj&display=swap');
+        body{
+            font-family: 'Pridi', serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="nav">
+        <div class="logo" >
+            <img src={% static "icon/menu_book.png" %} alt="">
+            <a href="/">
+                <h1>ZACHRY</h1>
+            </a>
+            <button onclick="run()" style="border:none; background-color:#D63031; color: #fff; padding-top: 18px;" > Snow</button>
+        </div>
+        <form method="GET" class="search-form" action="{% url 'search'%}">
+            <div class="search" style=" border-radius: 10px; position: relative;">
+                <input class="search-input" id="searchInput" placeholder="Search" name="title" style="border-radius: 10px;">
+                <button style="position: absolute; right:-10px; background-color: rgba(0,0,0,0); border: none;" >
+                    <img src={% static "icon/search.png" %} alt="">
+                </button>
+            </div>
+        </form>
+        
+        <div class="control-group" style="display:flex; align-items: center;">
+            {% if request.user.is_authenticated and request.user.first_name %}
+                <a href=" {% url 'account'%}"> <p style="margin-right: 10px;"> บัญชี : {{user.first_name}} </p> </a>
+                <p>|</p>
+                <button class="login-button open-button" style="margin-right: 10px;">
+                    <a href="{% url 'signOut' %}">ออกจากระบบ</a>
+                </button>
+            {% else %} 
+                <button class="signup-button">
+                    <a href="{% url 'signUp' %}">สมัครสมาชิก</a>
+                </button>
+                <p>|</p>
+                <button class="login-button open-button">
+                    <a href="{% url 'signIn' %}">เข้าสู่ระบบ</a>
+                </button>
+                
+            {% endif %}
+            <p>|</p>
+            <a href="/cartdetail" style="margin-top:5px; margin-left:10px"> <img src={% static "icon/cart.png" %} alt=""> 
+                {% if item_count > 0 %}
+                    {{item_count}}
+                {% else %}
+                    0
+                {% endif %}
+            </a>
+            
+        </div>
+
+
+    </div>
+    
+    
+    
+    
+    
+    {% block content %}
+    
+    {% endblock%}
+    <link rel="stylesheet" type="text/css" href="{% static "css/newlayout1.css" %}"/>
+    <footer> 
+        <div class="warpper">
+            <h3 class="storelabel">
+                ร้ายขายหนังสือออนไลน์แซคคะรี่
+            </h3>
+            <div class="flexwarpper">
+                <div class="aboutus">
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/store.svg" %} alt="">
+                        <h4 class="label">
+                            317 ถนนพระราม 3 ซอยสาธุประดิษฐ์ 57 <br>เขตยานนาวา แขวงบางโพงพาง กรุงเทพฯ 10120
+                        </h4>
+                    </div>
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/call.svg" %} alt="">
+                        <h4 class="label">
+                            088-317-5719
+                        </h4>
+                    </div>
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/email.svg" %} alt="">
+                        <h4 class="label">
+                            hello@zachrybook.com
+                        </h4>
+                    </div> 
+                    <br>
+                    <br>                  
+                    <h4 class="label">
+                        Copyright © 2021 Zachry.co All Rights Reserved.
+                    </h4>
+                </div>
+                <div class="social">
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/line.png" %} alt="">
+                        <h4 class="label">
+                            @zachrybook
+                        </h4>
+                    </div>
+                    <div class="iconlabel">
+                        <a href="https://www.facebook.com/sekyelent" target="_blank"><img class="icon" src={% static "icon/facebook.png" %} alt=""> </a>
+                        <a href="https://www.facebook.com/sekyelent" target="_blank"><h4 class="label">
+                            Zachry Bookstore
+                        </h4></a>
+                    </div>
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/ig.png" %} alt="">
+                        <h4 class="label">
+                            @zachry_bookstore
+                        </h4>
+                    </div>
+                    <div class="iconlabel">
+                        <img class="icon" src={% static "icon/twitter.png" %} alt="">
+                        <h4 class="label">
+                            @zachry_bookstore
+                        </h4>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+</body>
+
+</html>

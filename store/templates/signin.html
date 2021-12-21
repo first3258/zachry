@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" type="text/css" href="{% static "css/layout.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/signin2.css" %}"/>
+
+<div class="flex-container" style="margin-bottom: 150px ; margin-top: 30px" >
+    <div class="big_logo">
+        <img src={% static "icon/menu_book_red.png" %} alt="" style=" width:85.5px; height:96px; color:##D63031;">
+        <h1>
+            ZACHRY
+        </h1>
+    </div>
+    <div class="signup-container" >
+        <h1> Login </h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form | crispy}}
+            <input type="submit" value="Login" class="login">
+        </form>
+    </div>
+</div>
+
+      
+    
+{% endblock content %}

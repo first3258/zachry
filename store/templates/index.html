@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+
+{% block content  %}
+
+{% include 'category.html' %}
+<link rel="stylesheet" type="text/css" href="{% static "css/category.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/layout2.css" %}"/>
+<div class="container">
+    
+    
+    {% if category != None %}
+        <h1 style="font-weight: 500; "> {{category.name}}</h1>
+    {% endif %}
+
+    <div class="book-container">
+        {% for product in products %}
+            <div class="book-group">
+                <div >
+                    <a href="{{product.get_url}}" > <img src="{{product.image.url}}" alt="" srcset="" class="image" style="height:260px; "></a>
+                </div>
+                <div style="height:50px; margin-top:10px;">
+                    <a href="{{product.get_url}}"> <p style="width:220px; font-weight: 500; color:#2D3436; margin-top:10px;">{{product.name}}</p> </a>
+                </div>
+
+                <p class="author" style="color:#636E72; margin-top:10px;">{{product.author}}</p>
+              
+                <p class="author" style="font-weight: 500; color:#2D3436; ">฿ {{product.price }}</p>
+           
+                <button >
+                    <span> 
+                        <img src={% static "icon/cart.png" %} alt="" style="width:18px; height:18px">
+                        <a href="{% url 'addCart' product.id %}">เพิ่มในรถเข็น</a>
+                    </span>
+                </button>
+            </div>
+            
+        {% endfor %}
+    </div>
+
+</div>
+<canvas id="falling-snow-canvas">
+        
+</canvas> 
+
+<script src={% static "css/snow.js" %}></script>
+
+{% endblock  %}

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title of the document</title>
+    
+</head>
+<body>
+    <!-- Category Menu-->
+    <div class="category">
+        
+        <input id="toggle1" type="checkbox" />
+        <label class="hamburger1" for="toggle1">
+                <img src={% static "icon/category.png" %} alt="">
+        </label>
+        
+        <div id="navbar" class="navigation" role="navigation">
+                {% for category in links %}
+                    
+                        
+                    <nav class="menu1 navigation">
+                        <a class="link1" href="{{category.get_url}}">{{category.name}}</a>
+                    </nav>
+                    
+                
+                {% endfor %} 
+            
+            
+        </div>
+
+    </div>
+</bodt>
+</html>

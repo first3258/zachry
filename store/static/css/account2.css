@@ -1,0 +1,84 @@
+.container-account{
+    width: 1200px;
+    height: 70vh;
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+.user-img{
+    display: flex;
+    align-items: center;
+    
+}
+h1{
+    margin: 0;
+}
+
+.header{
+    width: 100%;
+    background-color: #D63031;
+    border-radius: 10px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+.sub-header{
+    padding-left: 50px; 
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+#edit {
+    display: none;
+}
+
+.edit {
+    top: 20%;
+    left: 35%;
+    position: fixed;
+    width: 30%;
+    height: 60%;
+    padding: 40px;
+    background-color: #F7F7F7;
+    border: 2px solid #888888;
+    border-radius: 10px;
+    box-shadow: 1px 5px 8px 1px #888888;
+    flex-flow: column;
+}
+
+.textinput {
+    border-color: #888888;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.formedit {
+    position: relative;
+}
+
+.summit {
+    background-color: #D63031;
+    color: white;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    margin-bottom:10px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    border-radius: 15px;
+    transition-duration: 250ms;
+    position: absolute;
+    bottom: -25%;
+    right: 0%;
+}
+
+.closebutton {
+    align-self: flex-end;
+    width: 20px;
+    cursor: pointer;
+}

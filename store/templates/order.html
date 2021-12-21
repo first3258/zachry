@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/layout.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/order.css" %}"/>
+<div class="container-account">
+    <div >
+        <div class="user-img" >
+            <img src={% static "icon/bunny.png" %} alt="" width=50px height=50px>
+            <p style="margin-left:15px; font-size:20px; ">{{ user.first_name }} </p>
+        </div>
+        <hr style="width:60%; margin-top: 20px; margin-bottom: 20px;">
+        <ui>จัดการบัญชีของฉัน 
+            <a href="{% url 'account' %}" style="color:black;"> <li > โปรไฟล์ของฉัน </li> </a>
+        </ui>
+        <ui style="font-weight:500;">คำสั่งซื้อ </ui>
+        <a href="{% url 'orderHistory' %}"  style="color:#D63031; font-size:20px; ;"> <li> ประวัติการสั่งซื้อ </li> </a>
+        
+    </div>
+    <div >
+        <div class="header">
+            <h1 style="color:#fff; font-weight:500"> ประวัติการสั่งซื้อ </h1>
+        </div>
+        {% if not orders %}
+            <div style="display: flex; flex-direction: column; align-items: center; width:100%; height:60vh; margin-top:50px;">
+                <img src={% static "icon/noOrder.png" %} alt="" style="height:240px; margin-right: 20px;"> 
+                <p style="font-size: 30px; font-weight: bold; color:#909497"> ไม่มีรายการสั่งซื้อ </p>
+                <a href="/"> <p style="font-size: 15px; font-weight: bold; color:#909497"> กลับไปหน้าหลักเพื่อสั่งซื้อสินค้า </p> </a>
+            </div>
+        {% else %}
+        <table style="margin-top: 10px;">
+            <thead>
+                <th>หมายเลขคำสั่งซื้อ</th>
+                <th>วันที่สั่งซื้อ</th>
+                <th>ราคา</th>
+                <th>สถานะ</th>
+                <th>ดูรายละเอียด</th>
+            </thead>
+            {% for item in orders %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.created}}</td>
+                <td>{{item.total}}</td>
+                <td>{{item.status}}</td>
+                <td>
+                    <a style="color:black; background-color: #454545; border-radius:10px; padding:1px 7px; color:#fff;" href="{% url 'orderDetails' item.id%}"> รายละเอียด </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

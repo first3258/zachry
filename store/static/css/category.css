@@ -1,0 +1,99 @@
+.link1 {
+    color: #000;
+    text-decoration: none;
+  }
+  .p-menu1{
+     
+  }
+  .hamburger1 {
+    cursor: pointer;
+    height: 0px;
+    
+    margin-bottom: 50px;
+    display: -ms-grid;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    z-index: 120;
+  }
+  .hamburger1 div {
+    background-color: rgb(61, 61, 61);
+    position: relative;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  #toggle1 {
+    display: none;
+  }
+  #toggle1:checked + .hamburger1 .top {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    margin-top: 22.5px;
+  }
+  #toggle1:checked + .hamburger1 .meat {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    margin-top: -5px;
+  }
+  #toggle1:checked + .hamburger1 .bottom {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  #toggle1:checked ~ .navigation .menu1 {
+    margin-left: 20px;
+    
+    height: 40px;
+  }
+  
+  .menu1 {
+    background-color: #f4f5f6;
+    margin: 0;
+    display: flex;
+    width: 25%;
+    align-items: center;
+    list-style: none;
+    clear: both;
+    width: auto;
+    height: 0px;
+    overflow: hidden;
+    transition: height .7s ease;
+    z-index: 120;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 50px;
+    margin-left: 20px;
+   
+  }
+  
+  .link1 {
+    width: 200px;
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    
+  }
+ 
+  .link1 {
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  
+  .link1:hover {
+    background-color: #fff;
+    width: 200%;
+    padding-top: 10px ;
+    border-radius: 10px;
+    color: rgb(165, 165, 165);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+
+
+  .navigation {
+    width: 100%;
+    display:grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    margin-left: 0px;
+    margin-top: 0;
+  }
+
