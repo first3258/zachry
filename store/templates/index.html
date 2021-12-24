@@ -28,13 +28,17 @@
                 <p class="author" style="color:#636E72; margin-top:10px;">{{product.author}}</p>
               
                 <p class="author" style="font-weight: 500; color:#2D3436; ">฿ {{product.price }}</p>
-           
-                <button >
-                    <span> 
-                        <img src={% static "icon/cart.png" %} alt="" style="width:18px; height:18px">
-                        <a href="{% url 'addCart' product.id %}">เพิ่มในรถเข็น</a>
-                    </span>
-                </button>
+                
+                {% if product.stock <= 0  %}
+                    <p style="color:red; margin-left: 55px;"> สินค้าหมด </p>
+                {% else %}
+                    <button >
+                        <span> 
+                            <img src={% static "icon/cart.png" %} alt="" style="width:18px; height:18px">
+                            <a href="{% url 'addCart' product.id %}">เพิ่มในรถเข็น</a>
+                        </span>
+                    </button>
+                {% endif %}
             </div>
             
         {% endfor %}

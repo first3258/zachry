@@ -46,12 +46,12 @@
     <form class="formedit" method="post">
         {% csrf_token %}
         <label for="fname">First name</label><br>
-        <input class="textinput" type="text" id="fname" name="fname" value="{{ user.first_name}}"><br><br>
+        <input class="textinput" type="text" id="fname" name="fname" value="{{ user.first_name}}" style="border-radius:5px;"><br><br>
         <label for="lname">Last name</label><br>
         <input class="textinput" type="text" id="lname" name="lname" value="{{ user.last_name}}"><br><br>
         <label for="email">Email</label><br>
-        <input class="textinput" type="text" id="email" name="email" value="{{user.email}}"><br><br>
-        <input class="summit" type="submit" value="Submit">
+        <input class="textinput" type="text" id="email" name="email" value="{{user.email}}" style="border-radius:5px;"><br><br>
+        <input class="summit" type="submit" value="Submit" >
     </form>
 </div>
 <script src={% static "css/account.js" %}></script>

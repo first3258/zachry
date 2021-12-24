@@ -26,7 +26,7 @@ def index(request, category_slug=None):
     return render(request, 'index.html', {'products': products, 'category': category_page})
 
 def productPage(request, category_slug, product_slug):
-
+    error = []
     try:
         product = Product.objects.get(category__slug = category_slug, slug = product_slug)
         category = Product.objects.filter(category__slug = category_slug)
@@ -36,7 +36,8 @@ def productPage(request, category_slug, product_slug):
 
     if request.method == 'POST':
             quantity = request.POST['quantiry']
-        
+
+
             try:
                 # cart = Cart.objects.get(card_id = _cart_id(request))
                 cart = Cart.objects.get(user = request.user.id)
@@ -44,23 +45,33 @@ def productPage(request, category_slug, product_slug):
                 cart = Cart.objects.create(card_id =  _cart_id(request), user = request.user.id)
                 cart.save()
     
+
+    
             try:
                 #ซื้อรายการสิ้นค้าซ้ำ
                 cart_item = CartItem.objects.get(product_id = product, cart_id = cart)
-                cart_item.quantity += int(quantity)
-                cart_item.save()
+                if int(quantity) + cart_item.quantity > product.stock:
+                    error.append("จำนวนหนังสือไม่พอ")
+                    print(error)
+                else:
+                    
+                    cart_item.quantity += int(quantity)
+                    cart_item.save()
             except CartItem.DoesNotExist:
                 #ซื้อรายการสิ้นค้าครั้งแรก
-                cart_item = CartItem.objects.create(
-                    product = product,
-                    cart = cart,
-                    quantity = quantity
-                )
-                cart_item.save()
+                if int(quantity) > product.stock:
+                    error.append("จำนวนหนังสือไม่พอ")
+                else:
+                    cart_item = CartItem.objects.create(
+                        product = product,
+                        cart = cart,
+                        quantity = quantity
+                    )
+                    cart_item.save()
 
-            return render(request, 'product.html', {'product': product, 'category': category})
+            return render(request, 'product.html', {'product': product, 'category': category, 'error': error})
 
-    return render(request, 'product.html', {'product': product, 'category': category})
+    return render(request, 'product.html', {'product': product, 'category': category, 'error': error})
 
 
 def _cart_id(request):
@@ -121,7 +132,38 @@ def cartdetail(request):
     description = "Playment Online"
     data_key = settings.PUBLIC_KEY
 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'payment' in request.POST:
+        email = request.POST['email']
+        name = request.POST['name']
+        address = request.POST['address']
+
+        order = Order.objects.create(
+                name = name,
+                address = address,
+                total = total,
+                email = email,
+                payment_status = 'ชำระเงินปลายทาง'
+            )
+
+        order.save()
+
+        for item in cart_items:
+                product = Product.objects.get(id = item.product.id)
+                order_item = OrderItem.objects.create(
+                    product = item.product.name,
+                    quantity = item.quantity,
+                    price = item.product.price,
+                    order = order
+                )
+                product.stock -= item.quantity
+
+                product.save()  
+                order_item.save()
+                item.delete()
+
+        return redirect('home')
+
+    elif request.method == 'POST':
         try:
             token = request.POST['stripeToken']
             email = request.POST['stripeEmail']
@@ -148,17 +190,23 @@ def cartdetail(request):
                 postcode = postcode,
                 total = total,
                 email = email,
-                token = token
+                token = token,
+                payment_status = 'ชำระเงินเรียบร้อย'
             )
             
             order.save()
+
             for item in cart_items:
+                product = Product.objects.get(id = item.product.id)
                 order_item = OrderItem.objects.create(
                     product = item.product.name,
                     quantity = item.quantity,
                     price = item.product.price,
                     order = order
                 )
+                product.stock -= item.quantity
+
+                product.save()  
                 order_item.save()
                 item.delete()
             return redirect('home')
@@ -245,3 +293,4 @@ def orderView(request, order_id):
         orderItem = OrderItem.objects.filter(order = order)
 
     return render(request, 'orderdetail.html', {'order' : order, 'order_items': orderItem})
+

@@ -35,11 +35,11 @@ h1{
 }
 
 .edit {
-    top: 20%;
+    top: 10%;
     left: 35%;
     position: fixed;
     width: 30%;
-    height: 60%;
+    height: 80%;
     padding: 40px;
     background-color: #F7F7F7;
     border: 2px solid #888888;

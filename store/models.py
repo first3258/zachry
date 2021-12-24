@@ -22,6 +22,10 @@ class Product(models.Model):
     category=models.ForeignKey(Category, on_delete=models.CASCADE)
     image=models.ImageField(upload_to="", blank=True)
     created=models.DateTimeField(auto_now_add=True)
+    stock=models.IntegerField(blank=True, default=10)
+    page_number = models.IntegerField(blank=True, default=123)
+    publisher = models.CharField(max_length=255, blank=True, default="None")
+    reprint = models.CharField(max_length=255, blank=True, default="None")
 
     def __str__(self):
         return self.name
@@ -63,6 +67,7 @@ class Order(models.Model):
     token = models.CharField(max_length=255, blank=True)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
+    payment_status = models.CharField(max_length=255, blank=True)
 
     A = 'กำลังเตรียมคำสั่งซื้อ'
     B ='กำลังจัดส่ง'

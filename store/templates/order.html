@@ -31,11 +31,12 @@
         {% else %}
         <table style="margin-top: 10px;">
             <thead>
-                <th>หมายเลขคำสั่งซื้อ</th>
-                <th>วันที่สั่งซื้อ</th>
-                <th>ราคา</th>
-                <th>สถานะ</th>
-                <th>ดูรายละเอียด</th>
+                <th style="font-weight: 500;">หมายเลขคำสั่งซื้อ</th>
+                <th style="font-weight: 500;">วันที่สั่งซื้อ</th>
+                <th style="font-weight: 500;">ราคา</th>
+                <th style="font-weight: 500;">สถานะ</th>
+                <th style="font-weight: 500;">สถานะการชำระเงิน</th>
+                <th style="font-weight: 500;">ดูรายละเอียด</th>
             </thead>
             {% for item in orders %}
             <tr>
@@ -43,6 +44,7 @@
                 <td>{{item.created}}</td>
                 <td>{{item.total}}</td>
                 <td>{{item.status}}</td>
+                <td>{{item.payment_status}}</td>
                 <td>
                     <a style="color:black; background-color: #454545; border-radius:10px; padding:1px 7px; color:#fff;" href="{% url 'orderDetails' item.id%}"> รายละเอียด </a>
                 </td>

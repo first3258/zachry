@@ -3,7 +3,7 @@ from . import models
 from store.models import Category,Product, Cart, CartItem, Order, OrderItem
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display=['id', 'name', 'total', 'token', 'created', 'updated', 'status']
+    list_display=['id', 'name', 'total', 'token', 'created', 'updated', 'status', 'payment_status']
     list_editable = ['status']
     
 

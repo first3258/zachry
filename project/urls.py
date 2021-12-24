@@ -23,7 +23,6 @@ urlpatterns = [
     path('orderHistory/', views.orderHistory, name="orderHistory"),
     path('order<int:order_id>', views.orderView, name="orderDetails"),
 
-
 ]
 
 

@@ -5,17 +5,38 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/layout1.css" %}"/>
 <link rel="stylesheet" type="text/css" href="{% static "css/category.css" %}"/>
 {% include 'category.html' %}
+        {% for error in error %}
+            <div style="width:1200px; height:50px; margin:0 auto; border: 1px solid #636E72; border-radius: 5px; background-color: #FFB5B5; padding: 10px; padding-left: 30px;"> 
+                <p style="color:red; font-size: 20px;"> {{error}} </p>
+            </div>
+        {% endfor %}
     <div class="product-container">
-        <img src="{{product.image.url}}" alt="" srcset="" style="height:600px;">
+        <div>
+            
+            <img src="{{product.image.url}}" alt="" srcset="" style="height:500px;">
+            <div style="border: 1px solid black; width:95%; margin: 0 auto; border-radius: 5px; padding: 20px;">
+                <p style="font-weight: 500; font-size: 20px;">ข้อมูลหนังสือ </p>
+                <p> ชื่อหนังสือ : {{product.name}} </p>
+                <p> ชื่อผู้แต่ง : {{product.author}} </p>
+                <p> หมวดหมู่ : {{product.category}} </p>
+                <p> สำนักพิมพ์ : {{product.publisher}} </p>
+                <p> จำนวนหน้า : {{product.page_number}} หน้า </p>
+                <p> พิมพ์ครั้งที่ : {{product.reprint}} </p>
+            </div>
+        </div>
+        
         
 
         <div class="desc-group">
             <p style="font-size:36px"> {{product.name}} </p>
             <p style="font-size:24px; margin-top:20px; color: #636E72;">{{product.author}} </p>
 
-            <div class="cart-group">
+            <div class="cart-group" style="padding-left: 50px;">
+                {% if product.stock <= 0  %}
+                    <p style="color:red; font-size: 20px;"> สินค้าหมด </p>
+                {% else %}
                 <p style="font-size: 28px; color:#D63031;"> ฿ {{product.price}} </p>
-                <div>
+                <div style="display:flex; align-items:center; justify-content:center;">
                     <form method="POST">
                         {% csrf_token %}
                         <input type="number" min=1 class="cart-count" value=1 name="quantiry" style="border: 1px #636E72 solid;">
@@ -26,7 +47,9 @@
                             </span>
                         </button>
                     </form>
+                    <p style="font-size: 20px; color:#C84B31; margin-left: 15px;">เหลือสินค้า : {{product.stock}} เล่ม </p>
                 </div>
+                {% endif %}
             </div>
 
             <p style="font-size:18px; margin-top:20px;">{{product.desciption}} </p>

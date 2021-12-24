@@ -4,6 +4,7 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static "css/layout.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/payment.css" %}"/>
     <div class="cart-container" style="margin-top: 20px;">
         {% if not cart_items  %}
             <h1>ตะกร้าของฉัน</h1>
@@ -47,23 +48,41 @@
         <hr>
         
         <h1 style="width:100%; text-align: end; margin-top:15px; "> ราคารวมทั้งสิ้น {{total}} บาท</h1>
-        <form action="" method="POST" style="margin-bottom:200px">
-            {% csrf_token %}
-            <script src="https://checkout.stripe.com/checkout.js"
-            class="stripe-button"
-            data-key="{{ data_key }}"
-            data-amount="{{ stripe_total}}"
-            data-name="Zachry"
-            data-description="{{ description }}"
-            data-locale="thailand"
-            data-currency="thb"
-            data-shipping-address="true"
-            data-billing-address="true"
-            data-zip-code="true">
-        </script>
-        {% endif %}
-    </form>
+        <div style="display:flex;">
+            <form action="" method="POST" style="margin-bottom:200px">
+                {% csrf_token %}
+                <script src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ data_key }}"
+                data-amount="{{ stripe_total}}"
+                data-name="Zachry"
+                data-description="{{ description }}"
+                data-locale="thailand"
+                data-currency="thb"
+                data-shipping-address="true"
+                data-billing-address="true"
+                data-zip-code="true">
+                </script>
+            </form>
+            <button onclick="openEdit()" style="height: 35px; width:125px; margin-left: 20px; border-radius:5px; background-color:#D63031; border:none; cursor:pointer;"> <p style="color:#fff; font-size:14px;"> ชำระเงินปลายทาง </p> </button>
+            <div id="edit" class="edit">
+                <img onclick="closeEdit()" class="closebutton" src={% static 'icon/close.svg' %} alt="">
+                <form style="margin-bottom:200px" class="formedit" method="POST">
+                    {% csrf_token %}
+                    <h3 style="color:#D63031; font-weight:500;">ชำระเงินปลายทาง</h3>
+                    <label for="fname">Email</label><br>
+                    <input class="textinput" type="text" id="fname" name="email" value="{{ user.email}}" style="border-radius:5px; height: 40px;"><br><br>
+                    <label for="lname">Name</label><br>
+                    <input class="textinput" type="text" id="lname" name="name" value="{{ user.first_name}}" style="border-radius:5px; height: 40px;"><br><br>
+                    <label for="lname">Address</label><br>
+                    <input class="textinput" type="text" id="lname" name="address"style="border-radius:5px; height: 80px;"> <br><br>
+                    
+                    <input class="summit" type="submit" value="ชำระเงิน" name="payment" >
+                </form>
+            </div>
+        </div>
+        {% endif %} 
 </div>
-
+<script src={% static "css/account.js" %}></script>
 
 {% endblock content %}
