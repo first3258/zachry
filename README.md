@@ -11,11 +11,7 @@ python -m venv
 
 ## Compiles and hot-reloads for development
 ```
-python .\manage.py runserver
-pip install django
-pip install django-crispy-forms
-pip install stripe
-pip install Pillow
+pip install -r requirements.txt 
 ```
 
 ## Compiles and hot-reloads for development
