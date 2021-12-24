@@ -9,7 +9,7 @@ python -m venv
 .\Scripts\activate
 ```
 
-## Compiles and hot-reloads for development
+## Install needed package
 ```
 pip install -r requirements.txt 
 ```
